@@ -73,12 +73,12 @@ class KeyboardControl {
 	comma;
 	period;
 	constructor () {
-		this.keys = [];
+		this.keys;
 		
-		this.keyCodeLog = [];
+		this.keyCodeLog;
 		
-		this.keyDownCallBacks = [];
-		this.keyUpCallBacks = [];
+		this.keyDownCallBacks;
+		this.keyUpCallBacks;
 		
 		this.pipe = new Key(220);
 		this.keys.push(this.pipe);

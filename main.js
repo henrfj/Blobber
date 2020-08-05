@@ -42,6 +42,7 @@ class Game{
         this.renderEngine.addBlob(newBlob);
     }
     gameLoop(){
+        this.keyboardController.update();
 
         // Do physics calculations.
         this.physicsEngine.run();
@@ -50,7 +51,16 @@ class Game{
         this.renderEngine.render();
 
         if(this.keyboardController.w.isDown){
-            console.log("!!");
+            this.blobs[0].velY += 0.1;
+        }
+        if(this.keyboardController.s.isDown){
+            this.blobs[0].velY -= 0.1;
+        }
+        if(this.keyboardController.d.isDown){
+            this.blobs[0].velX += 0.1;
+        }
+        if(this.keyboardController.a.isDown){
+            this.blobs[0].velX -= 0.1;
         }
         
         window.requestAnimationFrame(this.gameLoop.bind(this));

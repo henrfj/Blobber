@@ -20,4 +20,7 @@ class Render{
         //this.ctX.strokeStyle = '#003300';
         //this.ctX.stroke();
     }
+    clear(){
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
 }

@@ -9,7 +9,9 @@ class Physics{
     }
     run(){
         for(var i=0; i<this.blobs.length;i++){
-            
+            const b = this.blobs[i];
+            b.posX += b.velX;
+            b.posY += b.velY;
         }
     }
 }
