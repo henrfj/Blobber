@@ -1,18 +1,30 @@
 
 class Blob{
-    color;
+    color;  //used to distinguish between plants and creatures for now. Green for plants, red for creatures.
     rigid_body;
-    constructor(color){
-        this.rigid_body = new rigid_body;
+    constructor(posX, posY, radius, color){
+        this.rigid_body = new Rigid_body(posX, posY, radius);
         this.color = color;
     }
 }
 
+//--------------------------------------------------------------------------------------------------------------------------
 
 class Plant{
     blob;
-    reproduction_
-    constructor(color){
-        blob = new Blob(color);
+    reproduction_rate = 0.8;
+    Nutrition_value;
+    Growth_rate = 0.5; //Rate at which a plant reaches maturity, at what point it wil become more nutritient and grow bigger.
+    Growth = 0;
+    constructor(){
+        blob = new Blob(color='green', radius=7);
+    }
+}
+
+class Creature{
+    blob;
+    energy_level = 100;
+    constructor(){
+        blob = new Blob(color='red', radius=16);
     }
 }

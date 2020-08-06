@@ -1,12 +1,14 @@
 
 
-class rigid_body{
-    posX = 0;
-    posY = 0;
+class Rigid_body{
+    posX;
+    posY;
     velX = 0;
     velY = 0;
-    raidus = 10;
-    constructor(){
-        
+    radius;
+    constructor(posX, posY, radius){
+        this.radius = radius;
+        this.posX = posX;
+        this.posY = posY;
     }
 }

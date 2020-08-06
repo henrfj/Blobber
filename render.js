@@ -11,10 +11,10 @@ class Render{
         this.canvas = canvas;
         this.ctx = this.canvas.getContext('2d');
     }
-    circle(x, y, radius){
+    circle(x, y, radius, color){
         this.ctx.beginPath();
         this.ctx.arc(x, this.canvas.height - y, radius, 0, 2 * Math.PI, false);
-        this.ctx.fillStyle = 'green';
+        this.ctx.fillStyle = color;
         this.ctx.fill();
         //this.ctX.lineWidth = 5;
         //this.ctX.strokeStyle = '#003300';

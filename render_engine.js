@@ -16,7 +16,7 @@ class RenderEngine{
     render(){
         this.draw.clear();
         for(var i=0; i<this.blobs.length;i++){
-            this.draw.circle(this.blobs[i].posX, this.blobs[i].posY, this.blobs[i].radius)
+            this.draw.circle(this.blobs[i].rigid_body.posX, this.blobs[i].rigid_body.posY, this.blobs[i].rigid_body.radius, this.blobs[i].color);
         }
     }
 }

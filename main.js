@@ -12,6 +12,9 @@ class Game{
     keyboardController;
     canvas;
     renderEngine;
+
+    blob_number = 0;
+
     constructor(){
         this.keyboardController = new KeyboardControl();
         this.renderEngine = new RenderEngine();
@@ -20,7 +23,9 @@ class Game{
         this.blobs = [];
 
         // Create some blobs.
-        this.createBlob(100, 100, 10);
+        for(var i=0; i<10;i++){
+            this.createBlob(10*i+50, 10*i+50, 10);
+        }
     }
     setCanvas(canvas){
         this.canvas = canvas;
@@ -32,13 +37,10 @@ class Game{
     start(){
         window.requestAnimationFrame(this.gameLoop.bind(this));
     }
-    createBlob(x = 0,y = 0,r = 10){
-        let newBlob = new Blob();
-        newBlob.posX = x;
-        newBlob.posY = y;
-        newBlob.radius = r;
+    createBlob(x = 0,y = 0,r = 10, color = 'green'){
+        let newBlob = new Blob(x, y, r, color);
         this.blobs.push(newBlob);
-        this.physicsEngine.addBlob(newBlob);
+        this.physicsEngine.addBlob(newBlob.rigid_body);
         this.renderEngine.addBlob(newBlob);
     }
     gameLoop(){
@@ -50,18 +52,31 @@ class Game{
         // Render all blobs.
         this.renderEngine.render();
 
+        
+
+        if(this.keyboardController.q.isDown){
+            if(this.blob_number<this.blobs.length-1){
+                this.blob_number += 1;
+            } else {
+                this.blob_number = 0;
+            }
+                
+        }
         if(this.keyboardController.w.isDown){
-            this.blobs[0].velY += 0.1;
+            this.blobs[this.blob_number].rigid_body.velY += 0.1;
         }
         if(this.keyboardController.s.isDown){
-            this.blobs[0].velY -= 0.1;
+            this.blobs[this.blob_number].rigid_body.velY -= 0.1;
         }
         if(this.keyboardController.d.isDown){
-            this.blobs[0].velX += 0.1;
+            this.blobs[this.blob_number].rigid_body.velX += 0.1;
         }
         if(this.keyboardController.a.isDown){
-            this.blobs[0].velX -= 0.1;
+            this.blobs[this.blob_number].rigid_body.velX -= 0.1;
         }
+
+
+
         
         window.requestAnimationFrame(this.gameLoop.bind(this));
     }
