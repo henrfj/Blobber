@@ -27,23 +27,31 @@ class Physics{
 
         for(let i = 0; i<this.rigid_bodies.length; i++){
             let rigid_body = this.rigid_bodies[i];
-            if ((rigid_body.posX+rigid_body.radius)>=(this.width)){     //Collision right wall
+
+
+            //Collision right wall
+            if ((rigid_body.posX+rigid_body.radius)>=(this.width)){     
                 let temp = Math.abs(rigid_body.velX);
                 rigid_body.velX = -temp * wallDampener;
                 //console.log("Collision right wall")
             }
-            if ((rigid_body.posX-rigid_body.radius)<=0){                //Collision left wall
+
+            //Collision left wall
+            if ((rigid_body.posX-rigid_body.radius)<=0){               
                 let temp = Math.abs(rigid_body.velX);
                 rigid_body.velX = temp * wallDampener;
                 //console.log("Collision left wall")
             }
 
-            if ((rigid_body.posY+rigid_body.radius)>=(this.heigth)){    //Collision roof
+            //Collision roof
+            if ((rigid_body.posY+rigid_body.radius)>=(this.heigth)){    
                 let temp = Math.abs(rigid_body.velY);
                 rigid_body.velY = -temp * wallDampener;
                 //console.log("Collision roof!")
             }
-            if ((rigid_body.posY-rigid_body.radius)<=0){                //Collision floor
+
+            //Collision floor
+            if ((rigid_body.posY-rigid_body.radius)<=0){                
                 let temp = Math.abs(rigid_body.velY);
                 rigid_body.velY = temp * wallDampener;
                 //console.log("Collision floor")
