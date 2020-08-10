@@ -12,7 +12,7 @@ class Game{
     canvas;
     renderEngine;
 
-    blob_number = 0;
+    blob_number = 9;
 
     constructor(canvas){
         this.renderEngine = new RenderEngine();
@@ -25,7 +25,7 @@ class Game{
 
         // Create some blobs.
         for(var i=0; i<10;i++){
-            this.createBlob(20*i+50, 20*i+50, 10);
+            this.createBlob(50*i+50, 50*i+50, Math.sqrt(1+i)*10, "green", i+1);
         }
     }
     setCanvas(canvas){
@@ -38,10 +38,10 @@ class Game{
     start(){
         window.requestAnimationFrame(this.gameLoop.bind(this));
     }
-    createBlob(x = 0,y = 0,r = 10, color = 'green'){
-        let newBlob = new Blob(x, y, r, color);
+    createBlob(x = 0,y = 0,r = 10, color = 'green', mass=1){
+        let newBlob = new Blob(x, y, r, color, mass);
         this.blobs.push(newBlob);
-        this.physicsEngine.addBlob(newBlob.rigid_body);
+        this.physicsEngine.addBlob(newBlob);
         this.renderEngine.addBlob(newBlob);
     }
     gameLoop(){
@@ -62,16 +62,16 @@ class Game{
                 
         }
         if(this.keyboardController.w.isDown){
-            this.blobs[this.blob_number].rigid_body.velY += 0.05;
+            this.blobs[this.blob_number].velY += 0.05;
         }
         if(this.keyboardController.s.isDown){
-            this.blobs[this.blob_number].rigid_body.velY -= 0.05;
+            this.blobs[this.blob_number].velY -= 0.05;
         }
         if(this.keyboardController.d.isDown){
-            this.blobs[this.blob_number].rigid_body.velX += 0.05;
+            this.blobs[this.blob_number].velX += 0.05;
         }
         if(this.keyboardController.a.isDown){
-            this.blobs[this.blob_number].rigid_body.velX -= 0.05;
+            this.blobs[this.blob_number].velX -= 0.05;
         }
 
 

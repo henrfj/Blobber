@@ -1,9 +1,9 @@
 
-class Blob{
+class Blob extends Rigid_body {
     color;  //used to distinguish between plants and creatures for now. Green for plants, red for creatures.
     rigid_body;
-    constructor(posX, posY, radius, color){
-        this.rigid_body = new Rigid_body(posX, posY, radius);
+    constructor(posX, posY, radius, color, mass=1){
+		super(posX, posY, radius, mass);
         this.color = color;
     }
 }
