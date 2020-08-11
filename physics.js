@@ -2,7 +2,8 @@
 class Physics{
     rigid_bodies = [];
     width;
-    heigth;
+	heigth;
+	onCollisionEventListeners = [];
 
     constructor(heigth, width){
         this.width=width;
@@ -103,11 +104,12 @@ class Physics{
 						body1.velY = v1.y;
 						body2.velX = v2.x;
 						body2.velY = v2.y;
+
+						// Call all functions in the event listener for body 1 and 2.
+						for (let k = 0; k < this.onCollisionEventListeners.length; k++) {
+							this.onCollisionEventListeners[k](body1, body2);
+						}
 					}
-
-
-
-
                 }
             }
         }
@@ -115,6 +117,7 @@ class Physics{
 
     collision(body1, body2){
         if(this.distance(body1, body2) <= body1.radius + body2.radius){
+
             return true;
         }
         return false;
@@ -142,5 +145,8 @@ class Physics{
         
 
 
-    }
+	}
+	addOnCollisionEventListener(callback){
+		this.onCollisionEventListeners.push(callback);
+	}
 }

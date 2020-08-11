@@ -42,7 +42,10 @@ class Game{
             this.createPlant(pointX, pointY, radius, 'green', mass);
 
         }
-        
+		
+		this.physicsEngine.addOnCollisionEventListener(function(bodyA, bodyB){
+			console.log("!!!!");
+		}); // Tell the physics engine to call the ananomyouseus function every time two rigid bodies collide, namely bodyA and bodyB.
 
 
     }
