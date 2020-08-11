@@ -23,7 +23,7 @@ class Physics{
 
     wallCollision(){
 
-        let wallDampener = 0.3;
+        let wallDampener = 1;
 
         for(let i = 0; i<this.rigid_bodies.length; i++){
             let rigid_body = this.rigid_bodies[i];
@@ -80,15 +80,7 @@ class Physics{
             for(let j = i + 1; j<this.rigid_bodies.length; j++){
                 body2 = this.rigid_bodies[j];
                 if(this.collision(body1, body2)){
-                    // same mass => simply swap velocities
-                    /*let temp = body1.velX;
-                    body1.velX = body2.velX * collision_dampener;
-                    body2.velX = temp * collision_dampener;
-
-                    temp = body1.velY;
-                    body1.velY = body2.velY * collision_dampener;
-                    body2.velY = temp * collision_dampener;*/
-					
+               
 					let p1 = new Vec(body1.posX, body1.posY);
 					let p2 = new Vec(body2.posX, body2.posY);
 					
@@ -129,7 +121,16 @@ class Physics{
     }
 
     distance(body1, body2){
+        //between center of mass
         return Math.sqrt(Math.abs(body1.posX - body2.posX)**2 + Math.abs(body1.posY - body2.posY)**2);
+    }
+
+    airResistance(){
+        for(let i = 0; i < this.rigid_bodies.length; i++){
+            this.rigid_bodies[i].velX *= 0.99;
+            this.rigid_bodies[i].velY *= 0.99;
+
+        }
     }
 
     
@@ -137,5 +138,9 @@ class Physics{
         this.positionUpdater();
         this.wallCollision();
         this.bodyCollision();
+        this.airResistance();
+        
+
+
     }
 }

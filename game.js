@@ -17,7 +17,7 @@ class Game{
         this.physicsEngine = new Physics(this.canvas.height, this.canvas.width);
 
         // Create some Creatures along the edge
-        for(var i=0; i<20;i++){
+        for(let i=0; i < 20;i++){
             let pointA = new Vec(Math.random()-0.5,Math.random()-0.5)
             let pointB = Vec.div(pointA, Math.max(Math.abs(pointA.x), Math.abs(pointA.y)));
             console.log(i, ":", pointB);
@@ -32,17 +32,30 @@ class Game{
         }
 
         // Create some plants around the board
+
+        for(let i = 0; i < 200; i++){
+            let radius = (Math.random()*3)+3;
+            let mass = radius**2;
+
+            let pointX = radius + Math.random()*(this.canvas.width - radius);
+            let pointY = radius + Math.random()*(this.canvas.height - radius);
+            this.createPlant(pointX, pointY, radius, 'green', mass);
+
+        }
         
 
 
     }
+
     setCanvas(canvas){
         this.canvas = canvas;
         this.renderEngine.setCanvas(this.canvas);
     }
+
     set keyboardlistenerObject(keyboardlistenerObject){
         this.keyboardController.listenerObject = keyboardlistenerObject;
     }
+    
     start(){
         window.requestAnimationFrame(this.gameLoop.bind(this));
     }
@@ -70,6 +83,8 @@ class Game{
         // Render all creatures.
         this.renderEngine.render();
 
+
+
         if(this.keyboardController.q.isDown){
             if(this.number<this.creatures.length-1){
                 this.number += 1;
@@ -91,9 +106,6 @@ class Game{
             this.creatures[this.number].velX -= 0.05;
         }
 
-
-
-        
         window.requestAnimationFrame(this.gameLoop.bind(this));
     }
 }
