@@ -9,7 +9,7 @@ class Physics{
         this.heigth=heigth;
     }
 
-    addBlob(newRigid){
+    addBody(newRigid){
         this.rigid_bodies.push(newRigid);
     }
 
@@ -34,7 +34,7 @@ class Physics{
 				rigid_body.posX+rigid_body.radius >= this.width &&
 				rigid_body.velX > 0
 			){
-                rigid_body.velX = -rigid_body.velX
+                rigid_body.velX = -rigid_body.velX * wallDampener;
                 //console.log("Collision right wall")
             }
 
@@ -43,7 +43,7 @@ class Physics{
 				rigid_body.posX-rigid_body.radius <= 0 &&
 				rigid_body.velX < 0
 			){
-                rigid_body.velX = -rigid_body.velX
+                rigid_body.velX = -rigid_body.velX * wallDampener;
                 //console.log("Collision left wall")
             }
 
@@ -52,7 +52,7 @@ class Physics{
 				rigid_body.posY+rigid_body.radius >= this.heigth &&
 				rigid_body.velY > 0
 			){
-                rigid_body.velY = -rigid_body.velY
+                rigid_body.velY = -rigid_body.velY * wallDampener;
                 //console.log("Collision roof!")
             }
 
@@ -61,7 +61,7 @@ class Physics{
 				rigid_body.posY-rigid_body.radius <= 0 &&
 				rigid_body.velY < 0
 			){
-                rigid_body.velY = -rigid_body.velY
+                rigid_body.velY = -rigid_body.velY * wallDampener;
                 //console.log("Collision floor")
             }
 
@@ -70,7 +70,7 @@ class Physics{
 
     }
 
-    blob_collision(){
+    bodyCollision(){
 
         let collision_dampener = 1;
         let body1;
@@ -136,6 +136,6 @@ class Physics{
     run(){  //Timestep
         this.positionUpdater();
         this.wallCollision();
-        this.blob_collision();
+        this.bodyCollision();
     }
 }
